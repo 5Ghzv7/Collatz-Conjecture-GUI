@@ -56,15 +56,26 @@ class CltzConj:
     def NumUsrInpt(self):
         self._entries = []
         self.temp_row = 1
-        for i in range(1, self.max_num_input+1):
-            tk.Label(self.frame1, text="Enter number: ", bg="#1cd464", fg="white", font=self.font_tuple).grid(row=i+1, column=0, pady=5, padx=(5, 5), sticky="ew")
+        if self.max_num_input == 1:
+            tk.Label(self.frame1, text="Enter number: ", bg="#1cd464", fg="white", font=self.font_tuple).grid(row=2, column=0, pady=5, padx=(5, 5), sticky="ew")
             buffer = tk.Entry(self.frame1, font=self.font_tuple, fg="black")
-            buffer.grid(row=i+1, column=1, pady=5, padx=(5, 5), sticky="ew")
+            buffer.grid(row=2, column=1, pady=5, padx=(5, 5), sticky="ew")
             self._entries.append(buffer)
-            self.temp_row += i
-        self.usr_inpt_button = tk.Button(self.frame1, text="Enter", command=self.UpdateVal, bg="#007abd", fg="white", font=self.font_tuple)
-        self.usr_inpt_button.grid(row=self.temp_row, column=1, pady=5, padx=(5, 5), sticky="ew")
-        self.frame1.bind("<Return>", self.UpdateVal)
+            self.temp_row = 3
+            
+            self.usr_inpt_button = tk.Button(self.frame1, text="Enter", command=self.UpdateVal, bg="#007abd", fg="white", font=self.font_tuple)
+            self.usr_inpt_button.grid(row=3, column=1, pady=5, padx=(5, 5), sticky="ew")
+            self.frame1.bind("<Return>", self.UpdateVal)
+        else:
+            for i in range(1, self.max_num_input+1):
+                tk.Label(self.frame1, text="Enter number: ", bg="#1cd464", fg="white", font=self.font_tuple).grid(row=i+1, column=0, pady=5, padx=(5, 5), sticky="ew")
+                buffer = tk.Entry(self.frame1, font=self.font_tuple, fg="black")
+                buffer.grid(row=i+1, column=1, pady=5, padx=(5, 5), sticky="ew")
+                self._entries.append(buffer)
+                self.temp_row += i
+            self.usr_inpt_button = tk.Button(self.frame1, text="Enter", command=self.UpdateVal, bg="#007abd", fg="white", font=self.font_tuple)
+            self.usr_inpt_button.grid(row=self.temp_row, column=1, pady=5, padx=(5, 5), sticky="ew")
+            self.frame1.bind("<Return>", self.UpdateVal)
 
     def UpdateVal(self):
         self.val = []
